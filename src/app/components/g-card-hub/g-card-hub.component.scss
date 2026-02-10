@@ -1,0 +1,46 @@
+.container {
+  width: 255px;
+  height: 310px;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 100%;
+  }
+}
+
+.hover-card .icon {
+  color: var(--primary-color);
+}
+
+.hover-card:hover h2,
+.hover-card:hover .icon {
+  color: var(--primary-color-text);
+}
+
+.hover-card:hover p {
+  color: var(--primary-color-text);
+  margin-top: 0px !important;
+}
+
+.hover-card:hover p.product-conf {
+  margin-top: 8px !important;
+}
+
+.hover-card:hover p.option {
+  margin-top: 0.5px !important;
+}
+
+.hover-card span.fa-solid.fa-circle-arrow-right {
+  display: none;
+}
+
+.hover-card:hover span.fa-solid.fa-circle-arrow-right {
+  display: block;
+}
+
+.padding-card {
+  padding-left: 27.5px;
+  padding-right: 22px;
+}
