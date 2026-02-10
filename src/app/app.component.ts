@@ -8,7 +8,7 @@ import { filter, map } from 'rxjs';
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  title = 'Gym';
+  title = 'CashTruck';
   version = pkg.version;
   isLogoMenuBar = true;
   tituloMenuBar = '';
