@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  standalone: true,
 })
 export class HomeComponent {
   constructor(
@@ -74,6 +75,6 @@ export class HomeComponent {
 
   logout() {
     this.tokenService.clearToken();
-    this.router.navigate(['/auth']);
+    this.router.navigateByUrl('/auth');
   }
 }

@@ -4,8 +4,8 @@ import pkg from 'package.json';
 import { filter, map } from 'rxjs';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './app.component.html',
+    selector: 'app-home',
+    templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
   title = 'CashTruck';

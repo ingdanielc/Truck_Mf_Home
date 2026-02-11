@@ -72,10 +72,10 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Truck-Mf-Home:build:production"
+              "buildTarget": "Truck-Mf-Home:build:production"
             },
             "development": {
-              "browserTarget": "Truck-Mf-Home:build:development"
+              "buildTarget": "Truck-Mf-Home:build:development"
             }
           },
           "defaultConfiguration": "development"
