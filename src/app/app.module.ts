@@ -7,8 +7,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
-  declarations: [AppComponent, EmptyRouteComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, EmptyRouteComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

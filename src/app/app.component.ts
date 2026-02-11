@@ -4,8 +4,9 @@ import pkg from 'package.json';
 import { filter, map } from 'rxjs';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './app.component.html',
+  selector: 'app-home',
+  templateUrl: './app.component.html',
+  standalone: false,
 })
 export class AppComponent implements OnInit {
   title = 'CashTruck';
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -28,10 +29,10 @@ export class AppComponent implements OnInit {
           while (route.firstChild) route = route.firstChild;
           return route;
         }),
-        filter((route) => route.outlet === 'primary')
+        filter((route) => route.outlet === 'primary'),
       )
       .subscribe((route) => {
-        this.tituloMenuBar = "Strem Force";
+        this.tituloMenuBar = 'Strem Force';
         this.isSidebar = false;
         this.isLogoMenuBar = true;
         if (route.snapshot.url[0].path === 'configuration') {
