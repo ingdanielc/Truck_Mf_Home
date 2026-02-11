@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd, RouterOutlet } from '@angular/router';
 import pkg from 'package.json';
 import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './app.component.html',
-  standalone: false,
+  standalone: true,
+  imports: [RouterOutlet],
 })
 export class AppComponent implements OnInit {
   title = 'CashTruck';
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.router.events
