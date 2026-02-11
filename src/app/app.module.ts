@@ -6,26 +6,16 @@ import { AppComponent } from './app.component';
 import { EmptyRouteComponent } from './empty-route/empty-route.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeadersInterceptor } from './services/http-headers.service';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
-import { GMenuModule } from './components/g-menu/g-menu.module';
 
 @NgModule({
   declarations: [AppComponent, EmptyRouteComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    ToastModule,
-    GMenuModule,
-  ],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpHeadersInterceptor,
       multi: true,
     },
-    MessageService,
   ],
   bootstrap: [AppComponent],
 })
