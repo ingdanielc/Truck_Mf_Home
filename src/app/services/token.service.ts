@@ -18,7 +18,7 @@ export class TokenService {
 
   clearToken(): void {
     this.cookieService.delete('token','/',".localhost");
-    this.cookieService.delete('token','/',".gym.ccsoluciones.com.co");
+    this.cookieService.delete('token','/',".truck.ccsoluciones.com.co");
   }
 
   getPayload(): any {

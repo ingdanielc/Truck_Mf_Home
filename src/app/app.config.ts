@@ -12,6 +12,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([httpHeadersInterceptor])),
     CookieService,
-    { provide: APP_BASE_HREF, useValue: '/gym' },
+    { provide: APP_BASE_HREF, useValue: '/truck' },
   ],
 };
