@@ -21,6 +21,33 @@
       padding-right: 0 !important;
     }
   }
+
+  @media (max-width: 768px) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    box-shadow: none;
+    width: 260px !important;
+    min-width: 260px !important;
+
+    &.mobile-open {
+      transform: translateX(0);
+      box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+.mobile-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeIn 0.2s;
 }
 
 .fixed-width-icon {
@@ -40,6 +67,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }

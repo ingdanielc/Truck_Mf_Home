@@ -21,6 +21,7 @@ export class GMenuComponent implements OnInit {
   @Input() isLogoMenuBar: boolean = true;
   @Input() isCollapsed: boolean = false;
   currentTheme: 'light' | 'dark' = 'dark';
+  isMobileOpen: boolean = false;
 
   menuItems: MenuItem[] = [
     { label: 'Dashboard', icon: 'fa-solid fa-gauge', route: '/hub/dashboard' },
@@ -70,6 +71,14 @@ export class GMenuComponent implements OnInit {
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
+  }
+
+  toggleMobileMenu() {
+    this.isMobileOpen = !this.isMobileOpen;
+  }
+
+  closeMobileMenu() {
+    this.isMobileOpen = false;
   }
 
   toggleTheme() {

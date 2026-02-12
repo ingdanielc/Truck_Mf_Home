@@ -1,8 +1,16 @@
 <div class="d-flex h-screen overflow-hidden">
+  <!-- Mobile Backdrop -->
+  <div
+    class="mobile-backdrop d-md-none"
+    *ngIf="isMobileOpen"
+    (click)="closeMobileMenu()"
+  ></div>
+
   <!-- Sidebar -->
   <aside
     class="sidebar bg-dark text-white d-flex flex-column transition-all"
     [class.collapsed]="isCollapsed"
+    [class.mobile-open]="isMobileOpen"
   >
     <!-- Header/Logo -->
     <div

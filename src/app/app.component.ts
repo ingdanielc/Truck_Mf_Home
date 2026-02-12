@@ -8,12 +8,13 @@ import {
 import pkg from 'package.json';
 import { filter, map } from 'rxjs';
 import { GMenuComponent } from './components/g-menu/g-menu.component';
+import { GSidebarComponent } from './components/g-sidebar/g-sidebar.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [RouterOutlet, GMenuComponent],
+  imports: [RouterOutlet, GMenuComponent, GSidebarComponent],
 })
 export class AppComponent implements OnInit {
   title = 'CashTruck';
