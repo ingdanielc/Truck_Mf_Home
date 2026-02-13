@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TokenService } from 'src/app/services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'g-sidebar',
@@ -16,7 +18,10 @@ export class GSidebarComponent implements OnInit {
 
   isUserMenuOpen: boolean = false;
 
-  constructor() {}
+  constructor(
+    private readonly tokenService: TokenService,
+    private readonly router: Router,
+  ) {}
 
   ngOnInit(): void {}
 
@@ -30,7 +35,8 @@ export class GSidebarComponent implements OnInit {
   }
 
   logout() {
-    console.log('Cerrando sesión...');
+    this.tokenService.clearToken();
+    this.router.navigateByUrl('/auth');
     this.isUserMenuOpen = false;
   }
 }

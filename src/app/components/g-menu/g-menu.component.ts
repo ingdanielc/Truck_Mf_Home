@@ -24,7 +24,7 @@ export class GMenuComponent implements OnInit {
   isMobileOpen: boolean = false;
 
   menuItems: MenuItem[] = [
-    { label: 'Dashboard', icon: 'fa-solid fa-gauge', route: '/hub/dashboard' },
+    { label: 'Dashboard', icon: 'fa-solid fa-gauge', route: '/hub/home' },
     {
       label: 'Propietarios',
       icon: 'fa-solid fa-user-tie',
