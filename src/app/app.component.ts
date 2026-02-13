@@ -9,12 +9,18 @@ import pkg from 'package.json';
 import { filter, map } from 'rxjs';
 import { GMenuComponent } from './components/g-menu/g-menu.component';
 import { GSidebarComponent } from './components/g-sidebar/g-sidebar.component';
+import { ToastContainerComponent } from './components/toast-container/toast-container.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [RouterOutlet, GMenuComponent, GSidebarComponent],
+  imports: [
+    RouterOutlet,
+    GMenuComponent,
+    GSidebarComponent,
+    ToastContainerComponent,
+  ],
 })
 export class AppComponent implements OnInit {
   title = 'CashTruck';
