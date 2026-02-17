@@ -16,7 +16,7 @@ export class HomeComponent {
 
   listCard: any = [
     {
-      routing: '/site/partners',
+      routing: '/site/owners',
       title: 'Socios',
       icon: 'fa-solid fa-user-group',
       descriptions:
