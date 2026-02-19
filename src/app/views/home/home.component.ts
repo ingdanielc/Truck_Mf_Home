@@ -1,14 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
 import { SecurityService } from 'src/app/services/security.service';
-import {
-  Filter,
-  ModelFilterTable,
-  Pagination,
-  Sort,
-} from 'src/app/models/model-filter-table';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +12,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   private readonly allCards: any = [
     {
       routing: '/site/owners',
@@ -78,6 +73,7 @@ export class HomeComponent implements OnInit {
   ];
 
   listCard: any = [];
+  private userSub?: Subscription;
 
   constructor(
     private readonly tokenService: TokenService,
@@ -87,36 +83,22 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.listCard = [...this.allCards];
-    this.loadUserRole();
+    this.subscribeToUserContext();
   }
 
-  private loadUserRole(): void {
-    const payload = this.tokenService.getPayload();
-    if (payload) {
-      const userId = payload.nameid || payload.id || payload.sub;
-      if (userId) {
-        const filter = new ModelFilterTable(
-          [new Filter('id', '=', userId)],
-          new Pagination(1, 0),
-          new Sort('id', true),
-        );
+  private subscribeToUserContext(): void {
+    this.userSub = this.securityService.userData$.subscribe({
+      next: (user) => {
+        if (user) {
+          const role = (user.userRoles?.[0]?.role?.name || '').toUpperCase();
+          this.filterCards(role);
+        }
+      },
+    });
+  }
 
-        this.securityService.getUserFilter(filter).subscribe({
-          next: (response: any) => {
-            if (response?.data?.content?.length > 0) {
-              const user = response.data.content[0];
-              const role = (
-                user.userRoles?.[0]?.role?.name || ''
-              ).toUpperCase();
-              this.filterCards(role);
-            }
-          },
-          error: (err: any) => {
-            console.error('Error loading role for home cards:', err);
-          },
-        });
-      }
-    }
+  ngOnDestroy(): void {
+    this.userSub?.unsubscribe();
   }
 
   private filterCards(role: string): void {
