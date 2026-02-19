@@ -1,20 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
+import { SecurityService } from 'src/app/services/security.service';
+import {
+  Filter,
+  ModelFilterTable,
+  Pagination,
+  Sort,
+} from 'src/app/models/model-filter-table';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
+  imports: [CommonModule],
 })
-export class HomeComponent {
-  constructor(
-    private readonly tokenService: TokenService,
-    private readonly router: Router,
-  ) {}
-
-  listCard: any = [
+export class HomeComponent implements OnInit {
+  private readonly allCards: any = [
     {
       routing: '/site/owners',
       title: 'Socios',
@@ -72,6 +76,58 @@ export class HomeComponent {
         'Permite gestionar usuarios, gestionar roles y asignar permisos de la aplicación.',
     },
   ];
+
+  listCard: any = [];
+
+  constructor(
+    private readonly tokenService: TokenService,
+    private readonly router: Router,
+    private readonly securityService: SecurityService,
+  ) {}
+
+  ngOnInit(): void {
+    this.listCard = [...this.allCards];
+    this.loadUserRole();
+  }
+
+  private loadUserRole(): void {
+    const payload = this.tokenService.getPayload();
+    if (payload) {
+      const userId = payload.nameid || payload.id || payload.sub;
+      if (userId) {
+        const filter = new ModelFilterTable(
+          [new Filter('id', '=', userId)],
+          new Pagination(1, 0),
+          new Sort('id', true),
+        );
+
+        this.securityService.getUserFilter(filter).subscribe({
+          next: (response: any) => {
+            if (response?.data?.content?.length > 0) {
+              const user = response.data.content[0];
+              const role = (
+                user.userRoles?.[0]?.role?.name || ''
+              ).toUpperCase();
+              this.filterCards(role);
+            }
+          },
+          error: (err: any) => {
+            console.error('Error loading role for home cards:', err);
+          },
+        });
+      }
+    }
+  }
+
+  private filterCards(role: string): void {
+    if (role.includes('ADMINISTRADOR')) {
+      this.listCard = this.allCards;
+    } else if (role.includes('PROPIETARIO') || role.includes('CONDUCTOR')) {
+      this.listCard = this.allCards.filter(
+        (card: any) => card.title !== 'Socios' && card.title !== 'Seguridad',
+      );
+    }
+  }
 
   logout() {
     this.tokenService.clearToken();
